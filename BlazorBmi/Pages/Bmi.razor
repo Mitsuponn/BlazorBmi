@@ -1,28 +1,28 @@
 ﻿@page "/bmi"
 
-<h3>Bmi</h3>
-<table>
+<h3>シンプルな表示</h3>
+<table class="table">
     <tr>
-        <td>nama</td>
+        <td>名前</td>
         <td>@name</td>
     </tr>
     <tr>
-        <td>height</td>
+        <td>身長</td>
         <td>@height</td>
     </tr>
     <tr>
-        <td>weight</td>
+        <td>体重</td>
         <td>@weight</td>
     </tr>
 </table>
 <div style="font-size: @fontsize">
-    calculate: @bmi
+    計算結果は @bmi です。 
 </div>
 
 @code {
     private String name = "mitsuharu imamura";
     private const double height = 165.0;
     private const double weight = 60.0;
-    private double bmi = weight / ((height / 100.0) * (height / 100.0));
+    private String bmi = $"{weight / ((height / 100.0) * (height / 100.0)):F0}";
     private const String fontsize = "32px";
 }
