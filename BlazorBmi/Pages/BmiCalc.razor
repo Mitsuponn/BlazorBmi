@@ -19,9 +19,19 @@
 <div style="font-size: @fontsize">
     計算結果は @result です。
 </div>
+<div style="background-color:orange">
+    <h3>子コンポーネントで計算</h3>
+    <div>
+        身長：<input type="number" @bind="Height" /> cm
+    </div>
+    <div>
+        体重：<input type="number" @bind="Weight" /> kg
+    </div>
+    <button class="btn btn-primary" @onclick="clickCalc">計算する</button>
+</div>
 
 @code {
-    // URLから情報を受け取る
+        // URLから情報を受け取る
     private const String fontsize = "32px";
 
     private BmiItem bmi = new BmiItem()
@@ -37,4 +47,15 @@
     {
         this.result = bmi.Bmi;
     }
+    [Parameter]
+    public EventCallback<double> OnResultChanged { get; set; }
+    private double Height { get; set; } = 160.0;
+    private double Weight { get; set; } = 60.0;
+    private double Result { get; set; }
+    private async void clickCalc()
+    {
+        Result = Weight / ((Height / 100) * (Height / 100));
+        await OnResultChanged.InvokeAsync(Result);
+    }
+
 }

@@ -1,0 +1,14 @@
+﻿@page "/childclick"
+<h3>子コンポーネントのイベント受理</h3>
+<BlazorBmi.Pages.BmiCalc OnResultChanged="@ChangeResult" />
+<div style="font-size:32px">
+    Bmi結果:@Bmi
+</div>
+
+@code{
+    public double Bmi { get; set; }
+    private void ChangeResult(double result)
+    {
+        this.Bmi = result;
+    }
+}
