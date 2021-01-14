@@ -12,21 +12,18 @@
             <option value="@it.ID">@it.Name</option>
         }
     </select>
-    @*<lable class="col-form-label">電話番号</lable>
-        <input type="text" @bind="fontSize" class="form-control" />
-        <lable class="col-form-label">名前</lable>
-        <input type="text" @bind="fontSize" class="form-control" />
-        <lable class="col-form-label">年齢</lable>
-        <input type="text" @bind="fontSize" class="form-control" />
-        <lable class="col-form-label">好きなプログラミング言語</lable>
-        <input type="text" @bind="fontSize" class="form-control" />*@
-
+    <lable class="col-form-label">好きなプログラミング言語</lable>
+    <input type="checkbox" @bind="likeVB" class="form-check-input" />
+    <lable class="form-check-label" for="likevb">VB</lable>
 </div>
 
 @code {
     private string Name { get; set; }
     private int Age { get; set; }
     private int prefectureId { get; set; } = 13;
+    private bool likeVB { get; set; }
+    private bool likeCSharp { get; set; }
+
     private class PrefectureItem
     {
         public int ID { get; set; }
