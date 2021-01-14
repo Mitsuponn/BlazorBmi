@@ -1,0 +1,98 @@
+﻿@page "/addresslamdba"
+<h3>住所登録(Lambda式)</h3>
+<table class="table">
+    <tr>
+        <td>郵便番号</td>
+        <td><input type="text" @bind="zipcode" class="form-control" /></td>
+    </tr>
+    <tr>
+        <td>都道府県</td>
+        <td>
+            <select @bind="prefectureId" class="form-control">
+                @foreach (var it in prefectureList)
+                {
+                    <option value="@it.ID">@it.Name</option>
+                }
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>電話番号</td>
+        <td><input type="text" @bind="telephone" class="form-control" /></td>
+    </tr>
+    <tr>
+        <td>お名前</td>
+        <td><input type="text" @bind="name" class="form-control" /></td>
+    </tr>
+    <tr>
+        <td>年齢</td>
+        <td><input type="number" @bind="age" class="form-control" /></td>
+    </tr>
+</table>
+<button class="btn btn-primary" @onclick="@(() => message = $"{name}様、ありがとうございました。")">登録</button>
+<div style="margin-top:20px">@message</div>
+
+@code {
+    private string name { get; set; }
+    private int age { get; set; }
+    private string zipcode { get; set; }
+    private string telephone { get; set; }
+    private int prefectureId { get; set; } = 13;
+    private string message { get; set; }
+
+    private class PrefectureItem
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+    }
+    private List<PrefectureItem> prefectureList = new List<PrefectureItem>()
+{
+        new PrefectureItem() { ID=1, Name="北海道" } ,
+        new PrefectureItem() { ID=2, Name="青森県" } ,
+        new PrefectureItem() { ID=3, Name="岩手県" } ,
+        new PrefectureItem() { ID=4, Name="宮城県" } ,
+        new PrefectureItem() { ID=5, Name="秋田県" } ,
+        new PrefectureItem() { ID=6, Name="山形県" } ,
+        new PrefectureItem() { ID=7, Name="福島県" } ,
+        new PrefectureItem() { ID=8, Name="茨城県" } ,
+        new PrefectureItem() { ID=9, Name="栃木県" } ,
+        new PrefectureItem() { ID=10, Name="群馬県" } ,
+        new PrefectureItem() { ID=11, Name="埼玉県" } ,
+        new PrefectureItem() { ID=12, Name="千葉県" } ,
+        new PrefectureItem() { ID=13, Name="東京都" } ,
+        new PrefectureItem() { ID=14, Name="神奈川県" } ,
+        new PrefectureItem() { ID=15, Name="新潟県" } ,
+        new PrefectureItem() { ID=16, Name="富山県" } ,
+        new PrefectureItem() { ID=17, Name="石川県" } ,
+        new PrefectureItem() { ID=18, Name="福井県" } ,
+        new PrefectureItem() { ID=19, Name="山梨県" } ,
+        new PrefectureItem() { ID=20, Name="長野県" } ,
+        new PrefectureItem() { ID=21, Name="岐阜県" } ,
+        new PrefectureItem() { ID=22, Name="静岡県" } ,
+        new PrefectureItem() { ID=23, Name="愛知県" } ,
+        new PrefectureItem() { ID=24, Name="三重県" } ,
+        new PrefectureItem() { ID=25, Name="滋賀県" } ,
+        new PrefectureItem() { ID=26, Name="京都府" } ,
+        new PrefectureItem() { ID=27, Name="大阪府" } ,
+        new PrefectureItem() { ID=28, Name="兵庫県" } ,
+        new PrefectureItem() { ID=29, Name="奈良県" } ,
+        new PrefectureItem() { ID=30, Name="和歌山県" } ,
+        new PrefectureItem() { ID=31, Name="鳥取県" } ,
+        new PrefectureItem() { ID=32, Name="島根県" } ,
+        new PrefectureItem() { ID=33, Name="岡山県" } ,
+        new PrefectureItem() { ID=34, Name="広島県" } ,
+        new PrefectureItem() { ID=35, Name="山口県" } ,
+        new PrefectureItem() { ID=36, Name="徳島県" } ,
+        new PrefectureItem() { ID=37, Name="香川県" } ,
+        new PrefectureItem() { ID=38, Name="愛媛県" } ,
+        new PrefectureItem() { ID=39, Name="高知県" } ,
+        new PrefectureItem() { ID=40, Name="福岡県" } ,
+        new PrefectureItem() { ID=41, Name="佐賀県" } ,
+        new PrefectureItem() { ID=42, Name="長崎県" } ,
+        new PrefectureItem() { ID=43, Name="熊本県" } ,
+        new PrefectureItem() { ID=44, Name="大分県" } ,
+        new PrefectureItem() { ID=45, Name="宮崎県" } ,
+        new PrefectureItem() { ID=46, Name="鹿児島県" } ,
+        new PrefectureItem() { ID=47, Name="沖縄県" } ,
+    };
+}
