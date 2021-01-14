@@ -10,6 +10,24 @@
          @bind-style:event="onchange" class="form-control">フォントサイズの変更</div>
 </div>
 
+<h3>Styleから直接フォントサイズ変更</h3>
+<div class="form-group">
+    <lable class="col-form-label">フォントサイズ</lable>
+    <input type="text" @bind="fontSizeNum" class="form-control" />
+</div>
+<div class="form-group">
+    <lable class="col-form-label">@fontSizeNum</lable>
+    <div class="fontsize">数値指定によるフォントサイズの変更</div>
+    <style>
+        div.fontsize {
+            color: green;
+            background-color: yellow;
+            font-size: @(fontSizeNum)px;
+        }
+    </style>
+</div>
+
 @code {
     private string fontSize { get; set; } = "font-size: 12px";
+    private int fontSizeNum { get; set; } = 12;
 }
