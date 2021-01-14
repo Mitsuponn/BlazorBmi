@@ -1,10 +1,12 @@
 ﻿@page "/quest"
 <h3>質問フォーム</h3>
 <div class="form-group">
-    <lable class="col-form-label">郵便番号</lable>
-    <input type="text" @bind="Name" class="form-control" />
+    <lable class="col-form-label">お名前</lable>
+    <input type="text" @bind="name" class="form-control" />
     <lable class="col-form-label">年齢</lable>
-    <input type="number" @bind="Age" class="form-control" />
+    <input type="number" @bind="age" class="form-control" />
+    <lable class="col-form-label">郵便番号</lable>
+    <input type="text" @bind="zipcode" class="form-control" />
     <lable for="prefecture" class="col-form-label">都道府県</lable>
     <select @bind="prefectureId" class="form-control">
         @foreach (var it in prefectureList)
@@ -17,28 +19,34 @@
     <div>好きなプログラミング言語</div>
     <div class="form-check form-check-inline">
         <input type="checkbox" @bind="likePG[0]"
-               class="form-check-label" />
-        <lable class="col-form-label" for="likevb">VB</lable>
+               class="form-check-input" />
+        <lable class="col-check-label" for="likevb">VB</lable>
     </div>
     <div class="form-check form-check-inline">
         <input type="checkbox" @bind="likePG[1]"
-               class="form-check-label" for="likecsharp" />
+               class="form-check-input" />
+        <lable class="col-check-label" for="likecsharp">C#</lable>
     </div>
-    <lable class="col-form-label" for="likecsharp">C#</lable>
     <div class="form-check form-check-inline">
         <input type="checkbox" @bind="likePG[2]"
-               class="form-check-label" for="likecsharp" />
+               class="form-check-input" />
+        <lable class="col-check-label" for="likefsharp">F#</lable>
     </div>
-    <lable class="col-form-label" for="likecsharp">F#</lable>
-
 </div>
-
+<button class="btn btn-primary" @onclick="onSubmit">登録</button>
+<div style="margin-top:20px">@message</div>
 
 @code {
-    private string Name { get; set; }
-    private int Age { get; set; }
+    private string name { get; set; }
+    private int age { get; set; }
+    private string zipcode { get; set; }
     private int prefectureId { get; set; } = 13;
-    private bool[] likePG { get; set; } = new bool[2];
+    private bool[] likePG { get; set; } = new bool[3];
+    private string message { get; set; }
+    public void onSubmit()
+    {
+        this.message = $"{name} 様、ご登録ありがとうございました。";
+    }
 
     private class PrefectureItem
     {
