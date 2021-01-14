@@ -12,17 +12,33 @@
             <option value="@it.ID">@it.Name</option>
         }
     </select>
-    <lable class="col-form-label">好きなプログラミング言語</lable>
-    <input type="checkbox" @bind="likeVB" class="form-check-input" />
-    <lable class="form-check-label" for="likevb">VB</lable>
 </div>
+<div class="form-group">
+    <div>好きなプログラミング言語</div>
+    <div class="form-check form-check-inline">
+        <input type="checkbox" @bind="likePG[0]"
+               class="form-check-label" />
+        <lable class="col-form-label" for="likevb">VB</lable>
+    </div>
+    <div class="form-check form-check-inline">
+        <input type="checkbox" @bind="likePG[1]"
+               class="form-check-label" for="likecsharp" />
+    </div>
+    <lable class="col-form-label" for="likecsharp">C#</lable>
+    <div class="form-check form-check-inline">
+        <input type="checkbox" @bind="likePG[2]"
+               class="form-check-label" for="likecsharp" />
+    </div>
+    <lable class="col-form-label" for="likecsharp">F#</lable>
+
+</div>
+
 
 @code {
     private string Name { get; set; }
     private int Age { get; set; }
     private int prefectureId { get; set; } = 13;
-    private bool likeVB { get; set; }
-    private bool likeCSharp { get; set; }
+    private bool[] likePG { get; set; } = new bool[2];
 
     private class PrefectureItem
     {
