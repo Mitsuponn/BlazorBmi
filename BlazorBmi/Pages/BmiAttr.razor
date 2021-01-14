@@ -1,0 +1,51 @@
+﻿@page "/bmiattrs"
+<h3>属性情報なし</h3>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <td>名前</td>
+            <td>身長</td>
+            <td>体重</td>
+            <td>BMI</td>
+        </tr>
+    </thead>
+    @foreach (var it in Items)
+    {
+        <BlazorBmi.Component.BmiChildItem Name="@it.Name"
+                                          Height="@it.Height" Weight="@it.Weight" />
+    }
+</table>
+
+<h3>属性情報あり</h3>
+<table class="table">
+    <thead class="thead-light">
+        <tr>
+            <td>名前</td>
+            <td>身長</td>
+            <td>体重</td>
+            <td>BMI</td>
+        </tr>
+    </thead>
+    @foreach (var it in Items)
+    {
+        var attrs = new Dictionary<string, Object>()
+        {
+            { "Name", it.Name },
+            {"height", it.Height },
+            {"Weight", it.Weight },
+        };
+        <BlazorBmi.Component.BmiChildItem @attributes="attrs"/>
+    }
+</table>
+
+@code {
+    private List<BmiItem> Items { get; set; }
+    protected override void OnInitialized()
+    {
+        this.Items = new List<BmiItem>();
+        this.Items.Add(new BmiItem(){Name = "matsuda", Height=154.21, Weight=83,});
+        this.Items.Add(new BmiItem() { Name = "tomoki", Height = 187.01, Weight = 60, });
+        this.Items.Add(new BmiItem() { Name = "John", Height = 200.1, Weight = 120, });
+        this.Items.Add(new BmiItem() { Name = "matsuda", Height = 110.45, Weight = 40.12, });
+    }
+}

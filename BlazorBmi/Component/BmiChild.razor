@@ -1,0 +1,14 @@
+﻿<tr>
+    <td>@Item.Name</td>
+    <td>@Item.Height</td>
+    <td>@Item.Weight</td>
+    <td>@Item.Bmi</td>
+</tr>
+@code {
+    // パラメータの受け口
+    [Parameter]
+    public BmiItem Item { get; set; }
+    // パラメータの受け口
+    [Parameter]
+    public RenderFragment ChildContnet { get; set; }
+}

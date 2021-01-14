@@ -1,5 +1,9 @@
 ﻿<hr />
-<div style="text-align:right">Copyright 2020 by @name</div>
+<div style="text-align:right">Copyright @Year by @Name</div>
 @code {
-    private string name = "Mitsuharu Imamura";
+    // Copyrightで使用する名前と年情報は外部パラメータとして引き渡す
+    [Parameter]
+    public string Name { get; set; }
+    [Parameter]
+    public string Year { get; set; }
 }
