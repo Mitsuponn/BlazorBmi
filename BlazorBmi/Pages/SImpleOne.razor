@@ -8,7 +8,16 @@
     <lable class="col-form-label">フォーカスアウトで更新</lable>
     <div>@Title</div>
 </div>
+<div class="form-group">
+    <lable class="col-form-label">タイトルを入力</lable>
+    <input @bind="Title2" @bind:event="oninput" class="form-control" />
+</div>
+<div>
+    <lable class="col-form-label">随時更新</lable>
+    <div>@Title2</div>
+</div>
 
 @code {
     private string Title { get; set; }
+    private string Title2 { get; set; }
 }
