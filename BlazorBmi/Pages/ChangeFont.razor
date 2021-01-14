@@ -1,0 +1,15 @@
+﻿@page "/changefont"
+<h3>スタイルでフォントサイズ変更</h3>
+<div class="form-group">
+    <lable class="col-form-label">フォントサイズ</lable>
+    <input type="text" @bind="fontSize" class="form-control" />
+</div>
+<div class="form-group">
+    <lable class="col-form-label">@fontSize</lable>
+    <div @bind-style="fontSize"
+         @bind-style:event="onchange" class="form-control">フォントサイズの変更</div>
+</div>
+
+@code {
+    private string fontSize { get; set; } = "font-size: 12px";
+}
