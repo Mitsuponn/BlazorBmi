@@ -29,7 +29,13 @@
         <td><input type="number" @bind="age" class="form-control" /></td>
     </tr>
 </table>
-<button class="btn btn-primary" @onclick="@(() => message = $"{name}様、ありがとうございました。")">登録</button>
+<button class="btn btn-primary" @onclick="@(
+        () => 
+        {
+            message = $"{name}様、ありがとうございました。";
+        }
+        )">登録
+</button>
 <div style="margin-top:20px">@message</div>
 
 @code {
