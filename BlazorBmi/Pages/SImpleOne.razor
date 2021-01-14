@@ -1,0 +1,14 @@
+﻿@page "/simple"
+<h3>シンプルなバインド</h3>
+<div class="form-group">
+    <lable class="col-form-label">タイトルを入力</lable>
+    <input @bind="Title" class="form-control" />
+</div>
+<div>
+    <lable class="col-form-label">フォーカスアウトで更新</lable>
+    <div>@Title</div>
+</div>
+
+@code {
+    private string Title { get; set; }
+}
