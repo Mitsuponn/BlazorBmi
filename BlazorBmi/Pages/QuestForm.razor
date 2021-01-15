@@ -1,59 +1,101 @@
 ﻿@page "/quest"
 <h3>質問フォーム</h3>
 <div class="form-group">
-    <lable class="col-form-label">お名前</lable>
-    <input type="text" @bind="name" class="form-control" />
-    <lable class="col-form-label">年齢</lable>
-    <input type="number" @bind="age" class="form-control" />
-    <lable class="col-form-label">郵便番号</lable>
-    <input type="text" @bind="zipcode" class="form-control" />
-    <lable for="prefecture" class="col-form-label">都道府県</lable>
-    <select @bind="prefectureId" class="form-control">
-        @foreach (var it in prefectureList)
-        {
-            <option value="@it.ID">@it.Name</option>
-        }
-    </select>
+    <EditForm Model="namemodel" OnValidSubmit="onValidSubmit">
+        <lable class="col-form-label">お名前</lable>
+        <InputText id="name" @bind-Value="namemodel.name" class="form-control" />
+    </EditForm>
+</div>
+<div class="form-group">
+    <EditForm Model="agemodel" OnValidSubmit="onValidSubmit">
+        <div class="form-group">
+            <lable class="col-form-label">年齢</lable>
+            <InputNumber id="age" @bind-Value="agemodel.age" class="form-control" />
+        </div>
+    </EditForm>
+</div>
+<div class="form-group">
+    <EditForm Model="addressmodel" OnValidSubmit="onValidSubmit">
+        <div class="form-group">
+            <lable class="col-form-label" for="zipcode">郵便番号</lable>
+            <InputText id="zipcode" @bind-Value="addressmodel.zipcode" class="form-control" />
+        </div>
+    </EditForm>
+</div>
+<div class="form-group">
+    <EditForm Model="prefecturemodel" OnValidSubmit="onValidSubmit">
+        <lable for="prefecture" class="col-form-label">都道府県</lable>
+        <InputSelect id="prefectureId" @bind-Value="prefecturemodel.Name"
+                     class="form-control">
+            @foreach (var it in prefectureList)
+            {
+                <option value="@it.ID">@it.Name</option>
+            }
+        </InputSelect>
+    </EditForm>
 </div>
 <div class="form-group">
     <div>好きなプログラミング言語</div>
-    <div class="form-check form-check-inline">
-        <input type="checkbox" @bind="likePG[0]"
-               class="form-check-input" />
-        <lable class="col-check-label" for="likevb">VB</lable>
-    </div>
-    <div class="form-check form-check-inline">
-        <input type="checkbox" @bind="likePG[1]"
-               class="form-check-input" />
-        <lable class="col-check-label" for="likecsharp">C#</lable>
-    </div>
-    <div class="form-check form-check-inline">
-        <input type="checkbox" @bind="likePG[2]"
-               class="form-check-input" />
-        <lable class="col-check-label" for="likefsharp">F#</lable>
-    </div>
+    <EditForm Model="likepgmodel" OnValidSubmit="onValidSubmit">
+        <div class="form-check form-check-inline">
+            <InputCheckbox @bind-Value="likepgmodel.likeVB" class="form-check-input" />
+            <lable class="col-check-label" for="vblike">VB</lable>
+        </div>
+        <div class="form-check form-check-inline">
+            <InputCheckbox @bind-Value="likepgmodel.likeCsharp" class="form-check-input" />
+            <lable class="col-check-label" for="vblike">C#</lable>
+        </div>
+        <div class="form-check form-check-inline">
+            <InputCheckbox @bind-Value="likepgmodel.likeFsharp" class="form-check-input" />
+            <lable class="col-check-label" for="vblike">F#</lable>
+        </div>
+    </EditForm>
 </div>
-<button class="btn btn-primary" @onclick="onSubmit">登録</button>
-<div style="margin-top:20px">@message</div>
+    <button class="btn btn-primary" @onclick="onSubmit">登録</button>
+    <div style="margin-top:20px">@message</div>
 
-@code {
-    private string name { get; set; }
-    private int age { get; set; }
-    private string zipcode { get; set; }
-    private int prefectureId { get; set; } = 13;
-    private bool[] likePG { get; set; } = new bool[3];
-    private string message { get; set; }
-    public void onSubmit()
-    {
-        this.message = $"{name} 様、ご登録ありがとうございました。";
-    }
+    @code {
+        public class Address
+        {
+            public string zipcode { get; set; }
+        }
+        public class Age
+        {
+            public int age { get; set; }
+        }
+        public class Name
+        {
+            public string name { get; set; }
+        }
+        public class Likepg
+        {
+            public bool likeVB { get; set; }
+            public bool likeCsharp { get; set; }
+            public bool likeFsharp { get; set; }
+        }
 
-    private class PrefectureItem
-    {
-        public int ID { get; set; }
-        public string Name { get; set; }
-    }
-    private List<PrefectureItem> prefectureList = new List<PrefectureItem>()
+
+        private void onValidSubmit()
+        {
+
+        }
+        private Address addressmodel = new Address();
+        private Age agemodel = new Age();
+        private Name namemodel = new Name();
+        private Likepg likepgmodel = new Likepg();
+        private PrefectureItem prefecturemodel = new PrefectureItem();
+        private string message { get; set; }
+        public void onSubmit()
+        {
+            this.message = $"{namemodel.name} 様、ご登録ありがとうございました。";
+        }
+
+        private class PrefectureItem
+        {
+            public int ID { get; set; }
+            public string Name { get; set; }
+        }
+        private List<PrefectureItem> prefectureList = new List<PrefectureItem>()
 {
         new PrefectureItem() { ID=1, Name="北海道" } ,
         new PrefectureItem() { ID=2, Name="青森県" } ,
@@ -103,4 +145,4 @@
         new PrefectureItem() { ID=46, Name="鹿児島県" } ,
         new PrefectureItem() { ID=47, Name="沖縄県" } ,
     };
-}
+    }
