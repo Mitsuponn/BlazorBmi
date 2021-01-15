@@ -1,0 +1,36 @@
+﻿@page "/if"
+<h3>制御文による条件分岐</h3>
+<h4>if文</h4>
+
+@if (DEBUG)
+{
+    <p style="color:red">
+        此処の文章はデバッグ時にのみ表示されます。
+    </p>
+}
+<p>
+    Blazorの制御文を使用していきましょう。
+</p>
+<h4>for each文</h4>
+<table class="table">
+    @foreach (var it in books)
+    {
+    <tr>
+        <td>@it.Title</td>
+        <td>@it.Author</td>
+        <td>@it.Price</td>
+        <td>@it.Publisher</td>
+    </tr>
+    }
+</table>
+@code {
+    private bool DEBUG = true;
+    private List<Book> books;
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        books = new List<Book>();
+        books.Add(new Book() { Title = "Blazor入門", Author = "松田智明", Price = 2000, Publisher = "日経BP" });
+        books.Add(new Book() { Title = "Blazor入門2", Author = "松田智明", Price = 2000, Publisher = "日経BP" });
+    }
+}
