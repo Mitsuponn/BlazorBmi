@@ -5,6 +5,8 @@
 <EditForm Model="questionmodel" OnValidSubmit="onValidSubmit">
     <!--検証機能の有効化-->
     <DataAnnotationsValidator />
+    <!--独自で作成したBlazorCustomValidate(検証機能)の有効化 また@refでHTML内のコンポーネントを扱える-->
+    <CustomValidator @ref="customValidator" />
     @* 検証機能でのコメントを有効化*@
     <ValidationSummary />
 
@@ -57,10 +59,9 @@
         </div>
         <InputDate id="visit" @bind-Value="questionmodel.visitDate" class="form-control" />
     </div>
+    <button class="btn btn-primary" type="submit">登録</button>
+    <div style="margin-top:20px">@message</div>
 </EditForm>
-
-<button class="btn btn-primary" @onclick="onSubmit">登録</button>
-<div style="margin-top:20px">@message</div>
 
 @code {
     public class Question
@@ -79,16 +80,34 @@
         public DateTime visitDate { get; set; }
     }
 
-    private void onValidSubmit()
-    {
-
-    }
+    private CustomValidator customValidator = new CustomValidator();
     private Question questionmodel = new Question();
     private PrefectureItem prefecturemodel = new PrefectureItem();
     private string message { get; set; }
-    public void onSubmit()
+
+    private void onValidSubmit()
     {
-        this.message = $"{questionmodel.name} 様、ご登録ありがとうございました。";
+        customValidator.ClearErrors();
+        var errors = new Dictionary<string, List<string>>();
+        if (questionmodel.isVisitDate == true)
+        {
+            if (questionmodel.isVisitDate == true && questionmodel.visitDate == null)
+            {
+                errors.Add("VisitDate", new List<string>() { "訪問日を入力してください。" });
+            }
+            else if (questionmodel.visitDate <= DateTime.Today)
+            {
+                errors.Add("VisitDate", new List<string>() { "本日の日付 又 過去日付は訪問日として指定できません。" });
+            }
+        }
+
+        if (errors.Count > 0)
+        {
+            customValidator.DisplayErrors(errors);
+        } else
+        {
+            this.message = $"{questionmodel.name} 様、ご登録ありがとうございました。";
+        }
     }
 
     private class PrefectureItem
