@@ -2,13 +2,13 @@
 @using System.ComponentModel.DataAnnotations
  
 <h3>質問フォーム</h3>
-<EditForm Model="questionmodel" OnValidSubmit="onValidSubmit">
+<EditForm OnValidSubmit="onValidSubmit" EditContext="editcontext">
     <!--検証機能の有効化-->
     <DataAnnotationsValidator />
     <!--独自で作成したBlazorCustomValidate(検証機能)の有効化 また@refでHTML内のコンポーネントを扱える-->
     <CustomValidator @ref="customValidator" />
     @* 検証機能でのコメントを有効化*@
-    <ValidationSummary />
+    <ValidationSummary style="@displaysummary"/>
 
     <div class="form-group">
         <lable class="col-form-label">お名前</lable>
@@ -59,16 +59,18 @@
         </div>
         <InputDate id="visit" @bind-Value="questionmodel.visitDate" class="form-control" />
     </div>
-    <button class="btn btn-primary" type="submit">登録</button>
+    <button class="btn btn-primary" type="submit" disabled="@formInvalid">登録</button>
     <div style="margin-top:20px">@message</div>
 </EditForm>
 
 @code {
+
     public class Question
     {
         [Required(ErrorMessage = "郵便番号は入力必須項目です。")]
         [StringLength(maximumLength:7,MinimumLength =7,ErrorMessage="郵便番号は7桁で入力してください。")]
         public string zipcode { get; set; }
+        [Required(ErrorMessage = "年齢は入力必須項目です。")]
         [Range(18, 100, ErrorMessage = "年齢は18歳～100歳までです。")]
         public int age { get; set; }
         [Required(ErrorMessage ="名前は入力必須項目です。")]
@@ -85,8 +87,26 @@
     private PrefectureItem prefecturemodel = new PrefectureItem();
     private string message { get; set; }
 
+    private bool formInvalid = true;
+    private EditContext editcontext;
+    private string displaysummary = "display:none";
+
+    protected override void OnInitialized()
+    {
+        editcontext = new EditContext(questionmodel);
+        editcontext.OnFieldChanged += onFieldChanged;
+    }
+
+    private void onFieldChanged(object sender, FieldChangedEventArgs e)
+    {
+        formInvalid = !editcontext.Validate();
+        StateHasChanged();
+    }
+
     private void onValidSubmit()
     {
+        displaysummary = "display:block";
+        this.message = "";
         customValidator.ClearErrors();
         var errors = new Dictionary<string, List<string>>();
         if (questionmodel.isVisitDate == true)

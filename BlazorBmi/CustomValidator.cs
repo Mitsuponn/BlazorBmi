@@ -14,7 +14,6 @@ namespace BlazorBmi
         private EditContext CurrentEditContent { get; set; }
         protected override void OnInitialized()
         {
-            base.OnInitialized();
             if (CurrentEditContent == null)
             {
                 throw new InvalidOperationException("コンポーネント作成エラー");
