@@ -43,6 +43,14 @@
             <lable class="col-check-label" for="vblike">F#</lable>
         </div>
     </div>
+    <div class="form-group">
+        <div>訪問日</div>
+        <div class="form-check form-check-inline">
+            <InputCheckbox id="boolvisit" @bind-Value="questionmodel.isVisitDate" class="form-check-input" />
+            <lable class="col-check-label" for="vblike">訪問を希望する</lable>
+        </div>
+        <InputDate id="visit" @bind-Value="questionmodel.visitDate" class="form-control" />
+    </div>
 </EditForm>
 
 <button class="btn btn-primary" @onclick="onSubmit">登録</button>
@@ -57,8 +65,10 @@
         public bool likeVB { get; set; }
         public bool likeCsharp { get; set; }
         public bool likeFsharp { get; set; }
-
+        public bool isVisitDate { get; set; }
+        public DateTime visitDate { get; set; }
     }
+
     private void onValidSubmit()
     {
 
