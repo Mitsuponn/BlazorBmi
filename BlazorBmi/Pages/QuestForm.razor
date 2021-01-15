@@ -1,6 +1,12 @@
 ﻿@page "/quest"
+@using System.ComponentModel.DataAnnotations
+ 
 <h3>質問フォーム</h3>
 <EditForm Model="questionmodel" OnValidSubmit="onValidSubmit">
+    <!--検証機能の有効化-->
+    <DataAnnotationsValidator />
+    @* 検証機能でのコメントを有効化*@
+    <ValidationSummary />
 
     <div class="form-group">
         <lable class="col-form-label">お名前</lable>
@@ -59,8 +65,12 @@
 @code {
     public class Question
     {
+        [Required(ErrorMessage = "郵便番号は入力必須項目です。")]
+        [StringLength(maximumLength:7,MinimumLength =7,ErrorMessage="郵便番号は7桁で入力してください。")]
         public string zipcode { get; set; }
+        [Range(18, 100, ErrorMessage = "年齢は18歳～100歳までです。")]
         public int age { get; set; }
+        [Required(ErrorMessage ="名前は入力必須項目です。")]
         public string name { get; set; }
         public bool likeVB { get; set; }
         public bool likeCsharp { get; set; }
