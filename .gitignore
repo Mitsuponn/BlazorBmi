@@ -1,3 +1,12 @@
 BlazorBmi/.vs/BlazorBmi/DesignTimeBuild/.dtbcache.v2
 BlazorBmi/obj/Debug/
 BlazorBmi/.vs/
+BlazorBmi/bin/Debug/netstandard2.1/BlazorBmi.dll
+BlazorBmi/bin/Debug/netstandard2.1/BlazorBmi.pdb
+BlazorBmi/bin/Debug/netstandard2.1/wwwroot/_framework/blazor.boot.json
+BlazorBmi/bin/Debug/netstandard2.1/wwwroot/_framework/blazor.boot.json.gz
+BlazorBmi/bin/Debug/netstandard2.1/wwwroot/_framework/_bin/BlazorBmi.dll
+BlazorBmi/bin/Debug/netstandard2.1/wwwroot/_framework/_bin/BlazorBmi.dll.gz
+BlazorBmi/bin/Debug/netstandard2.1/wwwroot/_framework/_bin/BlazorBmi.pdb
+BlazorBmi/bin/Debug/netstandard2.1/wwwroot/_framework/_bin/BlazorBmi.pdb.gz
+BlazorBmi/wwwroot/debug.log
