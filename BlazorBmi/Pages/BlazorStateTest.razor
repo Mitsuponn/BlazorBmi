@@ -1,0 +1,54 @@
+﻿@page "/blazorstate"
+<h3>Blazor構文テスト</h3>
+<h4>変数の表示</h4>
+<div>
+    私は @name です。
+</div>
+<div>
+    @*変数として認識されていない。*@
+    私は@name です。
+</div>
+<div>
+    @*括弧で閉じれば明示的なC#での宣言となる。*@
+    私は@(name)です。
+</div>
+<div>
+    @*コンパイルエラー
+        私は @nameです。*@
+</div>
+<div>
+    年齢： @age 歳
+</div>
+<div>
+    現在時刻： @DateTime.Today
+</div>
+<h4>フォーマット化の確認</h4>
+<div>
+    @*Tostringメソッドでフォーマット化*@
+    今日の日付： @DateTime.Today.ToString("yyyy年MM月dd日")
+</div>
+
+<div>
+    @*$"{~中身~}" でフォーマット化*@
+    今日の日付： @($"{DateTime.Today:yyyy年MM月dd日}")
+</div>
+<h4>コードブロックの確認</h4>
+<div>
+    Razarによる書き方
+    @{
+        void Hello(string name)
+        {
+            <p>Hello Blazor world for @name</p>
+        }
+        Hello("matsuda");
+    }
+</div>
+<div>
+    Blazarによる書き方
+    <p>Hello Blazor world for @name</p>
+</div>
+
+@code {
+    private string name { get; set; } = "山田太郎";
+    private int age { get; set; } = 64;
+}
