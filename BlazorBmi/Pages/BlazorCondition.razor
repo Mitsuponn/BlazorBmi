@@ -15,14 +15,18 @@
 <table class="table">
     @foreach (var it in books)
     {
-    <tr>
-        <td>@it.Title</td>
-        <td>@it.Author</td>
-        <td>@it.Price</td>
-        <td>@it.Publisher</td>
-    </tr>
+        <tr>
+            <td>@it.Title</td>
+            <td>@it.Author</td>
+            <td>@it.Price</td>
+            <td>@it.Publisher</td>
+        </tr>
     }
 </table>
+<h4>コメントの書き方</h4>
+<!-- HTMLに沿ったコメントの書き方-->
+@* Razorに沿ったコメントの書き方*@
+
 @code {
     private bool DEBUG = true;
     private List<Book> books;
