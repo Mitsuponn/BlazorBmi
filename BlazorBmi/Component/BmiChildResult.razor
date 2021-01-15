@@ -4,24 +4,25 @@
         Height:@Height cm, Weight:@Weight kg
     </div>
     <div>
-        BMI:@result
+        BMI is ,@Result
     </div>
-    <button class="btn btn-primary" onclick="clickCalc">計算する</button>
+    <button class="btn btn-primary" @onclick="clickCalc">計算する</button>
 </div>
 @code {
-    private double Height { get; set; } = 165.2;
-    private double _Weight { get; set; } = 62.54;
-    private double result { get; set; }
     [Parameter]
-    public double Weight
-    {
-        get => _Weight;
-        set
-        {
-            _Weight = value;
-            this.result = Weight / ((Height / 100) * (Height / 100));
-        }
-    }
+    public double Weight { get; set; }
     [Parameter]
     public EventCallback<double> WeightChanged { get; set; }
+    [Parameter]
+    public double Result { get; set; }
+    [Parameter]
+    public EventCallback<double> ResultChanged { get; set; }
+
+    private double Height { get; set; } = 165.2;
+
+    private async void clickCalc()
+    {
+        Result = Weight / ((Height / 100) * (Height / 100));
+        await ResultChanged.InvokeAsync(Result);
+    }
 }
